@@ -83,7 +83,7 @@ const expertDetailsSlice = createSlice({
       state.rating = (totalRatings / state.reviews.length).toFixed(1);
     },
 
-    // Clear expert data (e.g., on logout)
+    
     clearExpertData() {
       return initialState;
     },

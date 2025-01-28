@@ -22,7 +22,8 @@ const Requests = () => {
          }
       
           const getRequest = async()=>{
-            try{  const res = await axios.get(BASE_URL + "/user/requests/received",{
+            try{
+               const res = await axios.get(BASE_URL + "/user/requests/received",{
                 withCredentials:true,
               });
              dispatch(addRequest(res.data?.connectionRequests));
@@ -38,12 +39,12 @@ const Requests = () => {
           getRequest();
   },[])
  if(!requests) return;
- if(requests.length === 0) return(<div className="flex justify-center items-center mt-10 "> 
+ if(requests?.length === 0) return(<div className="flex justify-center items-center mt-10 "> 
 <h1 className = "text-xl font-semibold">No Request found</h1></div>)
 return (
  
 <div className="flex justify-center items-center flex-col mt-10 space-y-6"> 
-<h1 className = "text-xl font-semibold">Requests({})</h1>
+<h1 className = "text-xl font-semibold">Requests({reqLen})</h1>
 
 {requests.map((request) => {
    
@@ -52,7 +53,7 @@ return (
  return ( 
    
    <div key={request._id} className="w-[70%]">
-     <div className="card card-compact flex-row bg-base-100 shadow-xl mx-auto">
+     <div className="card card-compact flex-row bg-black shadow-xl mx-auto px-3">
        <figure>
          <img src={photoUrl} alt="user-photo" className="w-24 h-24 rounded-full" />
        </figure>

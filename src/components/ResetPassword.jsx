@@ -13,6 +13,11 @@ const ResetPassword = () => {
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
     const handleResetPassword = async ()=>{
+        if (password !== confirmPassword) {
+            setError("Password and Confirm Password do not match");
+            setMessage(""); 
+            return;
+          }
         try{
               const res = await axios.post(BASE_URL + "/reset-password",{emailId,otp,newPassword:password},{withCredentials:true});
                  setMessage(res.data.message);
@@ -20,8 +25,7 @@ const ResetPassword = () => {
                  setTimeout(() => navigate('/login'), 2000);
         }
         catch(err){
-            
-               setError(err.message || "something went wrong");
+            setError(err?.response?.data?.message || 'Something went wrong');
                setMessage("");
         }
     }
@@ -29,6 +33,23 @@ const ResetPassword = () => {
     <div className ="flex justify-center mt-4">
     <div className="card bg-black w-96 shadow-xl ">
  <div className="card-body">
+ <button onClick = {()=>{navigate(-1)}} className="flex items-center text-darkPurple hover:text-electricBlue font-semibold px-4 py-2 rounded-lg focus:outline-none transition duration-200">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={2}
+    stroke="currentColor"
+    className="w-5 h-5 mr-2"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 19l-7-7 7-7"
+    />
+  </svg>
+ 
+</button>
  <h2 className="card-title">Reset Password</h2>
  <label className="form-control w-full max-w-xs"> 
   <div className="label">
@@ -51,7 +72,13 @@ const ResetPassword = () => {
    <div className="card-actions justify-center mt-3">
       <button onClick = {handleResetPassword} className="btn text-black bg-vibrantClay">Reset Password</button>
     </div>
-    {message && <p className="mt-4 text-green-600">{message}</p>}
+    {message && (
+  <div className="toast toast-top toast-center">
+    <div className="alert bg-green-600 text-white rounded-lg p-4 shadow-md">
+      <span>{message}</span>
+    </div>
+  </div>
+)}
     {error && <p className="mt-4 text-red-600">{error}</p>}
  </div>
 </div>

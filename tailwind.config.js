@@ -8,7 +8,12 @@ export default {
     theme: {
       extend: {
         colors: {
-          vibrantClay: '#00E0FF', // Vibrant electric blue
+          'dark-charcoal-gray': '#333333',
+          'soft-white': '#F8F8F8',
+          'light-gray': '#E5E5E5',
+          'neon-pink': '#FF007F',
+          'neon-pink-light': '#FF4D96',
+           vibrantClay: '#00E0FF',
         },
       },
     },

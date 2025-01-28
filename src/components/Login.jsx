@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../utils/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
+import { updateExpertStatus } from '../utils/expertDetailsSlice';
+import { setInteractions } from '../utils/interactionSlice';
+import { setAcceptedRequests, setExpertInteractions, setPendingRequests, setResolvedRequests } from '../utils/expertInteractionslice';
+
 
 const Login = () => {
   const [emailId,setEmailId] = useState("ayat123@gmail.com");
@@ -21,6 +25,7 @@ const Login = () => {
       navigate('/');
     }
   }, [user, navigate]);
+  
   const handleLogin = async()=>{
    try{
     const res = await axios.post(BASE_URL+ "/login",{
@@ -28,14 +33,48 @@ const Login = () => {
          password,
     },{withCredentials:true});
    dispatch(addUser(res.data))
+   const expertDetails = await axios.get(BASE_URL+"/expert-details", {
+    withCredentials: true,
+  });
+  if(expertDetails){
+  dispatch(updateExpertStatus(expertDetails.data));
+}
+ const userInteractions = await axios.get(BASE_URL+"/user-interactions", {
+  withCredentials: true,
+});
+if(userInteractions)
+  dispatch(setInteractions(userInteractions.data));
+const expertAllInteractions = await axios.get(BASE_URL+"/expert/all-requests",{withCredentials:true});
+ console.log(expertAllInteractions)
+if(expertAllInteractions)  
+dispatch(setExpertInteractions(expertAllInteractions.data));
+ const expertPendingInteractions = await axios.get(BASE_URL+"/expert/pending-requests",{withCredentials:true});
+  console.log(expertPendingInteractions)
+ if(expertPendingInteractions)
+ dispatch(setPendingRequests(expertPendingInteractions.data));
+  const expertAcceptedRequests = await axios.get(BASE_URL+"/expert/accepted-requests",{withCredentials:true})
+   if(expertAcceptedRequests)  
+  dispatch(setAcceptedRequests(expertAcceptedRequests.data));
+  const resolvedRequests = await axios.get(BASE_URL+"/expert/resolved-requests",{withCredentials:true})
+   console.log(resolvedRequests)
+  if(resolvedRequests)
+    dispatch(setResolvedRequests(resolvedRequests.data))
    return navigate("/");
   }
+  
+    
     catch(err){
+      console.log(err);
       setError(err?.response?.data);
     }
 
   }
   const handleSignUp = async ()=>{
+    if (password !== confirmPassword) {
+      setError("Password and Confirm Password do not match");
+      setMessage(""); 
+      return;
+    }
            try{
             const res = await axios.post(BASE_URL+"/signup",
               {firstName,lastName,emailId,password},{withCredentials:true}

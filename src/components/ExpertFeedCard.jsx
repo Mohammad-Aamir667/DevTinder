@@ -15,12 +15,12 @@ const ExpertFeedCard = ({expertDetails}) => {
         className="w-16 h-16 rounded-full object-cover"
       />
       <div className="ml-4 flex-1">
-        <h3 className="text-xl font-semibold text-gray-800">{expertId.firstName+" "+expertId.lastName}</h3>
+        <h3 className="text-xl font-semibold text-gray-800">{expertId?.firstName+" "+expertId?.lastName}</h3>
         <p className="text-sm text-gray-600">{expertise}</p>
         <p className="text-sm text-gray-500 mt-1">Experience Years {experienceYears}</p>
       </div>
       <Link
-        to={'/expert/'+expertId._id}
+        to={'/expert/'+expertId?._id}
         state={{ expertDetails: expertDetails }}
         className="text-purple-500 text-sm font-medium hover:underline"
       >

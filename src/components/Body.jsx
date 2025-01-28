@@ -12,17 +12,20 @@ const Body = () =>{
   const navigate = useNavigate();
   const user = useSelector((store)=>store.user);
   const fetchUser = async ()=>{
-       //  if(user) return;
+        if(user) return;
     try{   
-      const res = await axios.get(BASE_URL+"/profile",{},{
+      const res = await axios.get(BASE_URL+"/profile",{
        withCredentials:true,
       });
+      console.log(res.data)
     dispatch(addUser(res.data));
+    
        }
        catch(err){
-        if(err.status === 401)
+        console.log(err)
+       if(err.status === 401)
         navigate("/login"); 
-         else alert(err.response.data)
+else alert(err.response.data)
        }
   }
 useEffect(()=>{
@@ -32,7 +35,7 @@ useEffect(()=>{
   return (
     <div>
      <NavBar/>
-     <div className="flex-1 p-4 pb-20"> 
+     <div className="flex-1 pt-20 pb-20"> 
         <Outlet />
       </div>
      <BottomNavigation/>
