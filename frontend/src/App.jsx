@@ -23,6 +23,7 @@ import ExpertProfile from "./components/ExpertProfile"
 import ExpertOverView from "./components/ExpertOverView"
 import ViewRequests from "./components/ViewRequests"
 import Notifications from "./components/Notifications"
+import CreateGroupChat from "./components/CreateGroupChat"
 
 function App() {
   
@@ -43,7 +44,7 @@ function App() {
       <Route path= "/connections" element = {<Connections/>}></Route>
       <Route path = "/requests" element = {<Requests/>}></Route>
       <Route path ="/view-profile" element = {<ViewProfile/>}></Route>
-      <Route path = "/chat/:convotype" element = {<ChatList/>}></Route>
+      <Route path = "/chat-list" element = {<ChatList/>}></Route>
       <Route path = "/chat-box" element = {<Chat/>}></Route> 
       <Route path = "/forgot-password" element = {<ForgotPassword/>}></Route>
       <Route path = "/reset-password" element ={<ResetPassword/>}></Route>
@@ -56,7 +57,8 @@ function App() {
       <Route path = "/expert-profile" element ={<ExpertProfile/>}></Route>
       <Route path = "/view-requests" element ={<ViewRequests/>}></Route>
       <Route path = "/expert/:expertId" element ={<ExpertOverView/>}></Route>  
-      <Route path = "/notifications" element = {<Notifications/>}></Route>    
+      <Route path = "/notifications" element = {<Notifications/>}></Route>
+      <Route path = "/create-group-chat" element = {<CreateGroupChat/>}></Route>    
       </Route>
      </Routes>
       </BrowserRouter>

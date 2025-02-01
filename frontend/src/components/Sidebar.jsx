@@ -41,7 +41,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
           </Link>
         </li>
         <li>
-          <Link to="/expert/chatlist" className="block text-gray-700 hover:text-blue-500  items-center">
+          <Link to="/chat-list" className="block text-gray-700 hover:text-blue-500  items-center">
             <FontAwesomeIcon icon={faComment} className="mr-2" />
             Messages
           </Link>

@@ -52,7 +52,7 @@ const ExpertDashboard = () => {
   }
   const handleCardClick = (userProfile) => {
 
-    navigate("/chat-box", { state: { chatUser: userProfile } });
+navigate("/chat-box",{state:{chatUser:userProfile}});
 
   };
   const toggleSidebar = () => {
@@ -113,7 +113,7 @@ const ExpertDashboard = () => {
             </a>
           </li>
           <li>
-            <Link to={"/chat/" + convoType} state={{ conversationType: convoType }} className="block text-gray-700 hover:text-blue-500  items-center">
+            <Link to="/chat-list" className="block text-gray-700 hover:text-blue-500  items-center">
               <FontAwesomeIcon icon={faComment} size="lg" className="mr-2" />
               Messages
             </Link>

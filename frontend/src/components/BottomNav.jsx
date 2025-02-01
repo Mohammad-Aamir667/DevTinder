@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const BottomNavigation = () => {
   const user = useSelector((store) => store.user);
-      const convoType = "user-user"
+
   if (!user) return null; 
 
   return (
@@ -15,7 +15,7 @@ const BottomNavigation = () => {
           <FiHome className="text-2xl" />
           <span className="text-sm">Feed</span>
         </Link>
-        <Link to={"/chat/"+convoType}  state={{ conversationType: convoType }} className="flex flex-col items-center text-black hover:text-lightGray">
+        <Link to="/chat-list" className="flex flex-col items-center text-black hover:text-lightGray">
           <FiMessageSquare className="text-2xl" />
           <span className="text-sm">Chat</span>
         </Link>
